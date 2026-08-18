@@ -1,0 +1,17 @@
+#products {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: rgb(255, 212, 20);
+  padding: 20px;
+}
+#products div {
+  background-color: #a3f9ff;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+header{
+    text-align: center;
+    background-color: indianred;
+}

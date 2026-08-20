@@ -1,55 +1,69 @@
-const products = document.getElementById("products");
-let productsData = []
+const products = document.getElementsByClassName("product")[0];
+let productsData = [];
 
-const getProductsData = async () => {
-    const res = await fetch ("https://dummyjson.com/products");
-    const data = await res.json(); // return promise
-    productsData = data.products;
-    console.log(productsData);
-    productsData.map((product)=>{
-        const div = document.createElement("div");
-        const img = document.createElement("img");
-         img .src = product.thumbnail;
-         img.alt = "product img here";
+const getProductData = async () =>{
+ const res = await fetch("https://dummyjson.com/products");
+ const data = await res.json(); //return promises
+ console.log(data);
+//  console.log(data.products);
+ productsData = data.products;
 
-        const title = document.createElement("h1");
-          title.innerText = product.title;
+ console.log(productsData)
 
-        const price = document.createElement("h2");
-         price.innerText = `$${product.price}`;
-        const incrementBtn = document.createElement("button");
-         incrementBtn.innerText = "+";
-        const decrementBtn = document.createElement("button");
-         decrementBtn.innerText = "-";
-        const span = document.createElement("span");
-        span.innerText = "ADD";
+ productsData.map((product)=> {
+    
+    const div = document.createElement("div");
 
-        div.appendChild(img);
-        div.appendChild(title);
-        div.appendChild(price);
+    const img = document.createElement("img");
+    img.src= product.thumbnail;
+    img.alt = "product img here";    
+
+    const title = document.createElement("h1");
+    title.innerText = product.title;
+
+    const price = document.createElement("h2");
+    price.innerText = `$${product.price}`;
+
+    const incrementBtn = document.createElement("button");
+    incrementBtn.innerText = "+";
+
+    const decrementBtn = document.createElement("button");
+    decrementBtn.innerText = "-";
+
+    const span = document.createElement("span");
+    span.innerText = "ADD"
+
+    div.appendChild(img);
+    div.appendChild(title);
+    div.appendChild(price);
+    div.appendChild(decrementBtn);
+    div.appendChild(span);
         div.appendChild(incrementBtn);
-        div.appendChild(decrementBtn);div.appendChild(img);
-        div.appendChild(span);
         products.appendChild(div);
 
-        let counter = 0;
-
-        incrementBtn.addEventListener("click",() => {
-            counter++;
-            span.innerText = counter;
-            localStorage.setItem("image",product.thumbnail);
-            localStorage.setItem("title",product.title);
-            localStorage.setItem("price",product.price);
-        })
-        decrementBtn.addEventListener("click",() => {
-            if(counter > 0){
-                counter--;
-                span.innerText = counter;
-            }
-            
-        })
+    
+    let counter = 0;
+    incrementBtn.addEventListener("click", ()=>{
+        counter++;
+        span.innerText = counter;
 
 
+        localStorage.setItem("image" , product.thumbnail);
+        localStorage.setItem("title" , product.title);
+        localStorage.setItem("price" , product.price);
+    });
+
+
+
+
+      decrementBtn.addEventListener("click", ()=>{
+        if(counter > 0) counter--;
+        span.innerText = counter;
     })
+
+
+ });
 }
-getProductsData();
+
+
+getProductData();

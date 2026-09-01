@@ -1,5 +1,16 @@
-#prod-container{
+#prod-container {
     display: grid;
-    height: 200px;
-    
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid black;
+}
+
+#prod-container div {
+    border: 1px solid black;
+    text-align: center;
+    background-color: rgb(255, 238, 182);
+}
+
+#prod-container img {
+    width: 300px;
+    height: 300px;
 }

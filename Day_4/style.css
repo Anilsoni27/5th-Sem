@@ -1,18 +1,33 @@
 .product{
+
     display: grid;
+
     grid-template-columns: auto auto auto;
+
     padding: 10px;
+
 }
+
 .product div {
+
     background-color: #fff065;
+
     border: 2px solid black;
+
     padding: 10px;
+
     font-size: 25px;
+
     text-align: center;
+
     margin: 10px;
+
 }
 
 header{
+
     text-align: center;
+
     background-color: rgb(255, 72, 48);
+
 }

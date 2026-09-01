@@ -1,69 +1,142 @@
 const products = document.getElementsByClassName("product")[0];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let productsData = [];
 
-const getProductData = async () =>{
- const res = await fetch("https://dummyjson.com/products");
- const data = await res.json(); //return promises
- console.log(data);
-//  console.log(data.products);
- productsData = data.products;
+const getProductData = async () => {
 
- console.log(productsData)
+    const res = await fetch("https://dummyjson.com/products");
 
- productsData.map((product)=> {
-    
-    const div = document.createElement("div");
+    const data = await res.json();
 
-    const img = document.createElement("img");
-    img.src= product.thumbnail;
-    img.alt = "product img here";    
+    productsData = data.products;
 
-    const title = document.createElement("h1");
-    title.innerText = product.title;
+    productsData.forEach((product) => {
 
-    const price = document.createElement("h2");
-    price.innerText = `$${product.price}`;
+        const div = document.createElement("div");
 
-    const incrementBtn = document.createElement("button");
-    incrementBtn.innerText = "+";
+        const img = document.createElement("img");
+        img.src = product.thumbnail;
+        img.alt = product.title;
 
-    const decrementBtn = document.createElement("button");
-    decrementBtn.innerText = "-";
+        const title = document.createElement("h1");
+        title.innerText = product.title;
 
-    const span = document.createElement("span");
-    span.innerText = "ADD"
+        const price = document.createElement("h2");
+        price.innerText = `$${product.price}`;
 
-    div.appendChild(img);
-    div.appendChild(title);
-    div.appendChild(price);
-    div.appendChild(decrementBtn);
-    div.appendChild(span);
+        const decrementBtn = document.createElement("button");
+        decrementBtn.innerText = "-";
+
+        const span = document.createElement("span");
+
+        const incrementBtn = document.createElement("button");
+        incrementBtn.innerText = "+";
+
+        // Check if product already exists in cart
+        const existingProduct = cart.find(
+            (item) => item.id === product.id
+        );
+
+        let counter = existingProduct
+            ? existingProduct.quantity
+            : 0;
+
+        span.innerText = counter === 0 ? "ADD" : counter;
+
+
+        div.appendChild(img);
+        div.appendChild(title);
+        div.appendChild(price);
+        div.appendChild(decrementBtn);
+        div.appendChild(span);
         div.appendChild(incrementBtn);
+
         products.appendChild(div);
 
-    
-    let counter = 0;
-    incrementBtn.addEventListener("click", ()=>{
-        counter++;
-        span.innerText = counter;
+
+        // PLUS BUTTON
+        incrementBtn.addEventListener("click", () => {
+
+            counter++;
+
+            const existingProduct = cart.find(
+                (item) => item.id === product.id
+            );
+
+            if (existingProduct) {
+
+                existingProduct.quantity = counter;
+
+                existingProduct.totalPrice =
+                    existingProduct.price * counter;
+
+            } else {
+
+                cart.push({
+                    id: product.id,
+                    image: product.thumbnail,
+                    title: product.title,
+                    price: product.price,
+                    quantity: counter,
+                    totalPrice: product.price * counter
+                });
+            }
+
+            span.innerText = counter;
+
+            // Save complete cart array
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cart)
+            );
+
+            console.log(cart);
+        });
 
 
-        localStorage.setItem("image" , product.thumbnail);
-        localStorage.setItem("title" , product.title);
-        localStorage.setItem("price" , product.price);
+        // MINUS BUTTON
+        decrementBtn.addEventListener("click", () => {
+
+            if (counter > 0) {
+
+                counter--;
+
+                const existingProduct = cart.find(
+                    (item) => item.id === product.id
+                );
+
+                if (existingProduct) {
+
+                    existingProduct.quantity = counter;
+
+                    existingProduct.totalPrice =
+                        existingProduct.price * counter;
+
+                    // Remove product if quantity becomes 0
+                    if (counter === 0) {
+
+                        cart = cart.filter(
+                            (item) => item.id !== product.id
+                        );
+                    }
+                }
+
+                span.innerText =
+                    counter === 0 ? "ADD" : counter;
+
+                // Update localStorage
+                localStorage.setItem(
+                    "cart",
+                    JSON.stringify(cart)
+                );
+
+                console.log(cart);
+            }
+        });
+
     });
 
-
-
-
-      decrementBtn.addEventListener("click", ()=>{
-        if(counter > 0) counter--;
-        span.innerText = counter;
-    })
-
-
- });
-}
-
+};
 
 getProductData();

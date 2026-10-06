@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Student Management System</h1>
+    <form>
+        <div class="stud_info">
+            Student Name :
+            <input type="text" id="studentname">
+            Roll Number :
+            <input type="text" id="rollno"><br><br>
+        </div>
+        <br>
+        <div class="course_info">
+            <label for="course">Course :</label>
+            <select name="course" id="course">
+                <option value="none">None</option>
+                <option value="b.tech">B.Tech</option>
+                <option value="mba">MBA</option>
+                <option value="mca">MCA</option>
+            </select>
+
+            Marks :
+            <input type="text" id="marks"><br><br>
+        </div>
+        <br>
+        <br>
+        <div>
+            <input id="search" placeholder="Search by roll no or name">
+        </div>
+        <br>
+        
+
+        <button type="button" id="btn">Add Student</button><br><br>
+
+        
+
+        <table>
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Marks</th>
+                <th>Grades</th>
+                <th>Action</th>
+            </tr>
+        </table>
+
+
+
+
+
+
+    </form>
+
+</body>
+
+</html>

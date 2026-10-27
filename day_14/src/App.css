@@ -1,0 +1,74 @@
+
+/* Page styling */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f1f5f9;
+}
+
+/* Center the quiz */
+#root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Quiz card */
+.quiz-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Heading */
+h1 {
+  text-align: center;
+  color: #1e293b;
+  margin-top: 0;
+}
+
+/* Question counter */
+p:first-of-type {
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* Question */
+p:nth-of-type(2) {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1e293b;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Option buttons */
+button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  background-color: white;
+  color: #334155;
+  border: 1px solid #94a3b8;
+  border-radius: 0;
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Simple hover effect - no glow */
+button:hover {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
